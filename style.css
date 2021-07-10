@@ -1,0 +1,78 @@
+body{
+    background-color: rgb(223, 219, 219);
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+ #clock{
+   position: fixed;
+   top: 10px;
+   right: 10px;
+   border: 1px solid gray;
+   box-shadow: 5px 5px 5px gray;
+   width: 11%;
+   font-size: 30px;
+   padding:10px 20px;
+ }
+.main{
+    text-align: center;
+}
+#ID table, #donetaskjs table{
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 60%;
+    margin: auto;
+}
+  
+  #ID td, #ID th , #donetaskjs td, #donetaskjs th{
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  
+  
+  #ID tr:nth-child(even){background-color: #f2f2f2;}
+  #donetaskjs tr:nth-child(even){background-color: #f2f2f2;}
+  #ID tr:hover {background-color: #ddd;}
+  
+  #ID th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
+
+  #donetaskjs{
+    margin-top: 100px;
+  }
+  #donetaskjs th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #949b98;
+    color: white;
+  }
+form{
+    padding-top: 50px;
+    display: flex;
+    width: 60%;
+    margin: auto;
+    justify-content: space-between;
+}
+ form input{
+     padding: 10px 20px;
+     width: 46%;
+     border-radius: 5px;
+     outline: none;
+     border: 1px solid lightgrey;
+ }
+ form input[type=button]{
+  background-color: #04AA6D;
+  color: white;
+ }
+ form input[type=button]:hover{
+  background-color: #2cc98f;
+  
+ }
