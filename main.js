@@ -1,81 +1,59 @@
-var taskid = [];
-var taskName = [];
-var taskDone = [];
-var taskDoneDate=[];
-function addArray(){
-    
-    
-    var countid = 0;
-    var mytable = "<table>";
-    var CELL=0;
-    taskNamee = document.getElementById("t1").value;
-    countid=taskid.length;
-    countid+=1;
-    taskid.push(countid);
-    taskName.push(taskNamee);
-
-    mytable += "<tr><th>ID</th><th>TASKNAME</th><th>DONE</th><th>DELETE</th></tr>";
-       
-    for(CELL;CELL<taskid.length-1;CELL++) {  
-        
-        mytable += "<tr><td>"+taskid[CELL]+ "</td><td>" + taskName[CELL]+"</td><td><button onClick=doneTask("+CELL+")>DONE</button></td><td><button onClick=deleteTask("+CELL+")>DELETE</button></td></tr>";  
-        document.getElementById("ID").innerHTML = mytable;
+var allTasks=[];
+var completeTasks=[];
+var count = 1;
+function showTasksTable(){
+    var myTable ="<table>";
+    myTable += "<tr><th>Id</th><th>Task Name</th><th>Done</th><th>Delete</th></tr>";
+    for(let obj in allTasks){
+        myTable += "<tr><td>"+ allTasks[obj].id+"</td><td>"+allTasks[obj].name+"</td><td><i onclick='donetask("+allTasks[obj].id+")' class='fa-solid fa-check' style='color: #04AA6D;'</i></td><td><i onclick='deleteTask("+allTasks[obj].id+")' class='fa-solid fa-trash' style='color: #e53434;'></i></td></tr>";
     }
-     
-    mytable += "</table>";
-    document.getElementById("ID").innerHTML = mytable;
+    myTable +="</table>";
+    document.getElementById("ID").innerHTML = myTable;
+
 }
-function doneTask(id){
-    x=taskName[id];
-    xx=taskid[id];
-    taskName=taskName.filter(function(f) { return f !== x });
-    taskName[id]="DONE";
-    var date=new Date();
+function addTask(){
+    let task = document.getElementById("t1").value;
+    let taskObj = {
+        id:count,
+        name :task
+    }
+    allTasks.push(taskObj);
+    count++;
+    showTasksTable();
+    
+}
+
+function donetask(id){
+    var mycompleteTasks ="<table>";
+    let completeTask= allTasks.filter(function(f){
+        return f.id === id;
+    });
+    allTasks= allTasks.filter(function(f){
+        return f.id !== id;
+    });
+    completeTasks.push(completeTask);
+    mycompleteTasks += "<tr><th>Id</th><th>Task Name</th><th>Date</th></tr>";
+    let date = new Date();
     taskdate=date.getFullYear()+"-"+date.getMonth()+"-"+ date.getDay();
-    taskDoneDate.unshift(taskdate);
-    taskDone.splice(0,0,x);
-    var mytablee = "<table>";
-    var CELL=0;
-    countid=taskDone.length;
-    countid+=1;
-    mytablee += "<tr><th>TASKNAME</th><th>DateDone</th></tr>";
-       
-    for(CELL;CELL<taskDone.length-1;CELL++) {  
-        
-        mytablee += "<tr><td>"+taskDone[CELL]+ "</td><td>" + taskDoneDate[CELL]+"</td></tr>";  
-        document.getElementById("donetaskjs").innerHTML = mytablee;
-    }
-     
-    mytablee += "</table>";
-    document.getElementById("donetaskjs").innerHTML = mytablee;
-    // document.getElementById("donetaskjs").innerHTML=taskDone;
-   
+    for(let x in completeTasks){
+            mycompleteTasks += "<tr><td>"+ completeTasks[x][0].id+"</td><td>"+completeTasks[x][0].name+"</td><td>"+taskdate+"</td></tr>";
+        }
+        mycompleteTasks +="</table>";
+    showTasksTable();
+    document.getElementById("donetaskjs").innerHTML = mycompleteTasks;
 }
-
-
-// DELETE FUNCTION
 function deleteTask(id){
-     x=taskName[id];
-     xx=taskid[id];
-    // delete x;
-    // delete xx;
-    taskName=taskName.filter(function(f) { return f !== x });
-    taskid=taskid.filter(function(f) { return f !== xx });
-    var countid = 0;
-    var mytable = "<table>";
-    var CELL=0;
-    countid=taskid.length;
-    countid+=1;
-    mytable += "<tr><th>ID</th><th>TASKNAME</th><th>DONE</th><th>DELETE</th></tr>";
-       
-    for(CELL;CELL<taskid.length-1;CELL++) {  
-        
-        mytable += "<tr><td>"+taskid[CELL]+ "</td><td>" + taskName[CELL]+"</td><td><button onClick=doneTask("+CELL+")>DONE</button></td><td><button onClick=deleteTask("+taskid[CELL]+")>DELETE</button></td></tr>";  
-        document.getElementById("ID").innerHTML = mytable;
-    }
-     
-    mytable += "</table>";
-    document.getElementById("ID").innerHTML = mytable;
+    
+    // let completeTask= allTasks.filter(function(f){
+    //     return f.id === id;
+    // });
+    allTasks= allTasks.filter(function(f){
+        return f.id !== id;
+    });
+    // completeTasks.push(completeTask);
+   
+    showTasksTable();
+   
 }
 function showTime(){
     var date = new Date();
